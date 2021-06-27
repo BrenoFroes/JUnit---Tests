@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import jdk.jfr.Timestamp;
+
 @DisplayName("Classe para teste da calculadora")
 public class CalculadoraTest {
 	
@@ -21,7 +23,7 @@ public class CalculadoraTest {
 		calc = new Calculadora();
 	}
 	
-	@DisplayName("Testa a soma de dois números")
+	@DisplayName("Testa a soma de dois nï¿½meros")
 	@Test
 	public void testSomaDoisNumeros() {
 		int soma = calc.soma(4, 5);		
@@ -38,7 +40,7 @@ public class CalculadoraTest {
 	public void testDivisaoPorZero() {
 		try {
 			int divisao = calc.divisao(8, 0);
-			fail("Exceção não lançada");
+			fail("Exceï¿½ï¿½o nï¿½o lanï¿½ada");
 		}catch (ArithmeticException e) {
 			assertEquals("/ by zero", e.getMessage());
 		}		
@@ -50,4 +52,38 @@ public class CalculadoraTest {
 				() -> calc.divisao(8, 0));
 	}
 
+	@Test
+	public void testSomatoria(){
+		int numero = 5;
+		int somatorio = calc.somatoria(numero);
+		int soma = 0 ;
+		for (int i; i <= numero; i++){
+			soma += i;
+		}
+		assert.equals(soma, somatorio);
+	}
+
+	@Test
+	public void testEhPositivo(){
+		boolean result = calc.ehPositivo(5);
+		assertTrue(result);
+	}
+
+	@Test
+	public void testComparaIgual(){
+		int comparador = calc.compara(5, 5);
+		assertEquals(0, comparador);
+	}
+
+	@Test
+	public void testComparaMaior(){
+		int comparador = calc.compara(10, 5);
+		assertEquals(1, comparador);
+	}
+
+	@Test
+	public void testComparaMenor(){
+		int comparador = calc.compara(5, 10);
+		assertEquals(-1, comparador);
+	}
 }
